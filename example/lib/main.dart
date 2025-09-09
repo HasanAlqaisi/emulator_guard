@@ -1,8 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:emulator_guard/emulator_guard.dart';
+import 'package:emulator_guard/methods/base_method.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+/// Custom detection method that checks for suspicious device names
+/// This is an example of how to create your own detection method
+class CustomDeviceNameMethod extends BaseMethod {
+  CustomDeviceNameMethod({
+    super.score = 75,
+    super.reason = "Suspicious device name detected",
+  });
+
+  @override
+  Future<({double score, String? reason})> execute() async {
+    final deviceInfo = await DeviceInfoPlugin().deviceInfo;
+
+    String? deviceName;
+    if (deviceInfo is AndroidDeviceInfo) {
+      deviceName = deviceInfo.model;
+    } else if (deviceInfo is IosDeviceInfo) {
+      deviceName = deviceInfo.name;
+    }
+
+    if (deviceName != null) {
+      // Check for common emulator device names
+      final suspiciousNames = [
+        'emulator',
+        'simulator',
+        'sdk_gphone',
+        'android sdk',
+        'google_sdk',
+        'droid4x',
+        'nox',
+        'bluestacks',
+        'genymotion',
+        'andy',
+        'memu',
+        'ldplayer',
+        'mumu',
+        'x86_64',
+        'generic',
+        'unknown',
+      ];
+
+      final lowerDeviceName = deviceName.toLowerCase();
+      for (final suspiciousName in suspiciousNames) {
+        if (lowerDeviceName.contains(suspiciousName)) {
+          return (score: score, reason: '$reason: "$deviceName"');
+        }
+      }
+    }
+
+    return (score: 0.0, reason: null);
+  }
+}
+
+/// Custom detection method that checks for suspicious hardware characteristics
+/// This demonstrates checking hardware properties
+class CustomHardwareMethod extends BaseMethod {
+  CustomHardwareMethod({
+    super.score = 60,
+    super.reason = "Suspicious hardware characteristics detected",
+  });
+
+  @override
+  Future<({double score, String? reason})> execute() async {
+    final deviceInfo = await DeviceInfoPlugin().deviceInfo;
+
+    if (deviceInfo is AndroidDeviceInfo) {
+      // Check for suspicious hardware characteristics
+      final manufacturer = deviceInfo.manufacturer.toLowerCase();
+      final model = deviceInfo.model.toLowerCase();
+      final board = deviceInfo.board.toLowerCase();
+      final hardware = deviceInfo.hardware.toLowerCase();
+
+      // Check for common emulator hardware patterns
+      final suspiciousPatterns = [
+        'goldfish', // Android emulator
+        'ranchu', // Android emulator
+        'vbox', // VirtualBox
+        'vmware', // VMware
+        'qemu', // QEMU
+        'generic', // Generic hardware
+        'unknown', // Unknown hardware
+        'sdk', // SDK emulator
+        'google_sdk', // Google SDK
+      ];
+
+      for (final pattern in suspiciousPatterns) {
+        if (manufacturer.contains(pattern) ||
+            model.contains(pattern) ||
+            board.contains(pattern) ||
+            hardware.contains(pattern)) {
+          return (
+            score: score,
+            reason: '$reason: $pattern found in hardware info',
+          );
+        }
+      }
+
+      // Check for suspicious device characteristics
+      if (deviceInfo.isPhysicalDevice == false) {
+        return (
+          score: score,
+          reason: '$reason: DeviceInfo reports non-physical device',
+        );
+      }
+    }
+
+    return (score: 0.0, reason: null);
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -32,6 +143,7 @@ class _EmulatorGuardExampleState extends State<EmulatorGuardExample> {
   EmulatorCheckResult? _result;
   bool _isLoading = false;
   String _error = '';
+  bool _useCustomMethods = false;
 
   Future<void> _checkEmulator() async {
     setState(() {
@@ -40,7 +152,21 @@ class _EmulatorGuardExampleState extends State<EmulatorGuardExample> {
     });
 
     try {
-      final detector = EmulatorGuard();
+      EmulatorGuard detector;
+
+      if (_useCustomMethods) {
+        // Create EmulatorGuard with custom methods
+        detector = EmulatorGuard(
+          androidMethods: [CustomDeviceNameMethod(), CustomHardwareMethod()],
+          iosMethods: [CustomDeviceNameMethod()],
+          androidThreshold: 50, // Lower threshold for demo
+          iosThreshold: 50,
+        );
+      } else {
+        // Use default methods
+        detector = EmulatorGuard();
+      }
+
       final result = await detector.detect();
 
       setState(() {
@@ -72,6 +198,56 @@ class _EmulatorGuardExampleState extends State<EmulatorGuardExample> {
                 'Emulator Detection Demo',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Detection Method',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              _useCustomMethods
+                                  ? 'Using Custom Methods (Device Name + Hardware Check)'
+                                  : 'Using Default Methods (25+ Detection Methods)',
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                          ),
+                          Switch(
+                            value: _useCustomMethods,
+                            onChanged: (value) {
+                              setState(() {
+                                _useCustomMethods = value;
+                                _result = null; // Clear previous results
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      if (_useCustomMethods) ...[
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Custom methods demonstrate how to create your own detection logic.',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -199,6 +375,25 @@ class _EmulatorGuardExampleState extends State<EmulatorGuardExample> {
                       Text('• Configurable thresholds'),
                       Text('• Detailed reporting with reasons'),
                       Text('• Async file operations for better performance'),
+                      Text(
+                        '• Custom method support - create your own detection logic',
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        'Custom Methods Example:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text('This demo includes two custom methods:'),
+                      Text(
+                        '• CustomDeviceNameMethod: Checks for suspicious device names',
+                      ),
+                      Text(
+                        '• CustomHardwareMethod: Analyzes hardware characteristics for emulator patterns',
+                      ),
+                      Text(
+                        'Toggle the switch above to see how custom methods work!',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
                     ],
                   ),
                 ),

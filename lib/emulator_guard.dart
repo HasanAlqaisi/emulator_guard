@@ -4,42 +4,6 @@ import 'package:emulator_guard/result.dart';
 
 export 'package:emulator_guard/result.dart';
 
-/// A comprehensive Flutter package for detecting emulators and simulators across multiple platforms.
-///
-/// EmulatorGuard uses multiple detection methods and provides a scoring system to determine
-/// the likelihood that a device is an emulator. It supports Android, iOS, Linux, macOS, and Windows
-/// with platform-specific detection methods and configurable thresholds.
-///
-/// ## Features
-/// - **Multi-platform support**: Works on Android, iOS, Linux, macOS, and Windows
-/// - **Comprehensive detection**: Uses 25+ different detection methods for Android alone
-/// - **Configurable thresholds**: Customize sensitivity for different platforms
-/// - **Detailed reporting**: Provides reasons and scores for detection results
-/// - **Async file operations**: Non-blocking file system checks for better performance
-///
-/// ## Usage
-/// ```dart
-/// final detector = EmulatorGuard();
-/// final result = await detector.detect();
-///
-/// print('Is Physical Device: ${result.isPhysical}');
-/// print('Emulator Score: ${result.score}');
-/// print('Reasons: ${result.reasons.join(', ')}');
-/// ```
-///
-/// ## Detection Methods
-/// Each platform supports various detection methods with different reliability scores:
-/// - **File-based detection**: Checks for emulator-specific files and directories
-/// - **Hardware analysis**: Examines device hardware and board properties
-/// - **System properties**: Analyzes device manufacturer, model, and other properties
-/// - **Resource analysis**: Checks RAM, disk space, and other resource indicators
-/// - **Emulator-specific detection**: Identifies specific emulators like BlueStacks, LDPlayer, MEmu
-///
-/// ## Scoring System
-/// - Each detection method contributes a score (0-100 points)
-/// - Total score is compared against the platform threshold
-/// - If total score > threshold, device is considered an emulator
-/// - Default threshold is 50 points for all platforms
 class EmulatorGuard {
   /// if none is provided, [allAndroidMethods] will be used
   final List<EmulatorDetectionMethod> androidMethods;
@@ -76,16 +40,19 @@ class EmulatorGuard {
   EmulatorGuard({
     List<EmulatorDetectionMethod>? androidMethods,
     List<EmulatorDetectionMethod>? iosMethods,
-    this.linuxMethods = const [],
-    this.macOsMethods = const [],
-    this.windowsMethods = const [],
+    List<EmulatorDetectionMethod>? linuxMethods,
+    List<EmulatorDetectionMethod>? macOsMethods,
+    List<EmulatorDetectionMethod>? windowsMethods,
     this.androidThreshold = 50,
     this.iosThreshold = 50,
     this.linuxThreshold = 50,
     this.macOsThreshold = 50,
     this.windowsThreshold = 50,
   }) : androidMethods = androidMethods ?? allAndroidMethods,
-       iosMethods = iosMethods ?? allIosMethods;
+       iosMethods = iosMethods ?? allIosMethods,
+       linuxMethods = linuxMethods ?? [],
+       macOsMethods = macOsMethods ?? [],
+       windowsMethods = windowsMethods ?? [];
 
   /// Detects if the current device is an emulator or physical device.
   ///

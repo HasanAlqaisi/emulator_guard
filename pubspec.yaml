@@ -1,0 +1,20 @@
+name: emulator_guard
+description: "A Flutter package for detecting emulators and simulators across multiple platforms."
+version: 0.1.0
+homepage:
+
+environment:
+  sdk: ^3.9.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  device_info_plus: ^11.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:

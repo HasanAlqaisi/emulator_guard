@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks for x86-based hardware indicators.
 ///
@@ -19,7 +19,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 20 points when x86/virtualization hardware is detected
 ///
 /// **Performance**: Fast - only checks string property
-class HardwareX86Method extends BaseMethod {
+class HardwareX86Method extends EmulatorDetectionMethod {
   HardwareX86Method({
     super.score = 20,
     super.reason = "Hardware indicates emulator",

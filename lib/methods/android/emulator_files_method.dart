@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks for emulator-specific files and directories.
 ///
@@ -19,7 +19,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 25 points when emulator files are detected
 ///
 /// **Performance**: Asynchronous file operations to avoid blocking UI thread
-class EmulatorFilesMethod extends BaseMethod {
+class EmulatorFilesMethod extends EmulatorDetectionMethod {
   EmulatorFilesMethod({
     super.score = 25,
     super.reason = "Emulator-specific files detected",

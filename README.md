@@ -252,7 +252,7 @@ final detector = EmulatorGuard(
   
 
 ```dart
-class CustomDetectionMethod extends BaseMethod {
+class CustomDetectionMethod extends EmulatorDetectionMethod {
   CustomDetectionMethod() : super(score: 25, reason: 'Custom detection');
 
   @override

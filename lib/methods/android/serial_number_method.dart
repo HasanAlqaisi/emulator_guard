@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device serial number is "unknown".
 ///
@@ -16,7 +16,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 15 points when serial number is "unknown"
 ///
 /// **Performance**: Fast - only checks string property
-class SerialNumberMethod extends BaseMethod {
+class SerialNumberMethod extends EmulatorDetectionMethod {
   SerialNumberMethod({
     super.score = 15,
     super.reason = "Serial number is unknown",

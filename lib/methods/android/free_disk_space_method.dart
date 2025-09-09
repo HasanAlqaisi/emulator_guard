@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks for unusually high free disk space ratio.
 ///
@@ -17,7 +17,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 20 points when free disk space ratio is above 95%
 ///
 /// **Performance**: Fast - only checks numeric properties
-class FreeDiskSpaceMethod extends BaseMethod {
+class FreeDiskSpaceMethod extends EmulatorDetectionMethod {
   FreeDiskSpaceMethod({
     super.score = 20,
     super.reason = "Free disk space unusually high",

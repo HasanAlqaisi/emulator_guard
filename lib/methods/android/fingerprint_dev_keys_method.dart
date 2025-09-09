@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device fingerprint contains "dev-keys".
 ///
@@ -15,7 +15,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 15 points when fingerprint contains "dev-keys"
 ///
 /// **Performance**: Fast - only checks string property
-class FingerprintDevKeysMethod extends BaseMethod {
+class FingerprintDevKeysMethod extends EmulatorDetectionMethod {
   FingerprintDevKeysMethod({
     super.score = 15,
     super.reason = "Fingerprint contains dev-keys",

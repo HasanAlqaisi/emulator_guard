@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks for unusually low available RAM ratio.
 ///
@@ -16,7 +16,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 10 points when available RAM ratio is below 20%
 ///
 /// **Performance**: Fast - only checks numeric properties
-class AvailableRamMethod extends BaseMethod {
+class AvailableRamMethod extends EmulatorDetectionMethod {
   AvailableRamMethod({
     super.score = 10,
     super.reason = "Available RAM unusually low",

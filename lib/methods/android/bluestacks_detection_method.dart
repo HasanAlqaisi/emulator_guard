@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method specifically designed to identify BlueStacks emulator.
 ///
@@ -17,7 +17,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 30 points when BlueStacks is detected
 ///
 /// **Performance**: Fast - only checks string properties
-class BlueStacksDetectionMethod extends BaseMethod {
+class BlueStacksDetectionMethod extends EmulatorDetectionMethod {
   BlueStacksDetectionMethod({
     super.score = 30,
     super.reason = "BlueStacks emulator detected",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:emulator_guard/emulator_guard.dart';
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
 void main() {
@@ -9,7 +9,7 @@ void main() {
 
 /// Custom detection method that checks for suspicious device names
 /// This is an example of how to create your own detection method
-class CustomDeviceNameMethod extends BaseMethod {
+class CustomDeviceNameMethod extends EmulatorDetectionMethod {
   CustomDeviceNameMethod({
     super.score = 75,
     super.reason = "Suspicious device name detected",
@@ -61,7 +61,7 @@ class CustomDeviceNameMethod extends BaseMethod {
 
 /// Custom detection method that checks for suspicious hardware characteristics
 /// This demonstrates checking hardware properties
-class CustomHardwareMethod extends BaseMethod {
+class CustomHardwareMethod extends EmulatorDetectionMethod {
   CustomHardwareMethod({
     super.score = 60,
     super.reason = "Suspicious hardware characteristics detected",

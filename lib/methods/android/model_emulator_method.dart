@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device model contains "sdk_gphone" or "emulator".
 ///
@@ -14,7 +14,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 20 points when model contains "sdk_gphone" or "emulator"
 ///
 /// **Performance**: Fast - only checks string property
-class ModelEmulatorMethod extends BaseMethod {
+class ModelEmulatorMethod extends EmulatorDetectionMethod {
   ModelEmulatorMethod({
     super.score = 20,
     super.reason = "Model indicates emulator",

@@ -42,40 +42,40 @@ export 'package:emulator_guard/result.dart';
 /// - Default threshold is 50 points for all platforms
 class EmulatorGuard {
   /// if none is provided, [allAndroidMethods] will be used
-  final List<BaseMethod> androidMethods;
+  final List<EmulatorDetectionMethod> androidMethods;
 
   /// The threshold for the emulator check result
   /// If the score is greater than the threshold, the device is considered NOT physical
   final double androidThreshold;
 
   /// if none is provided, [allIosMethods] will be used
-  final List<BaseMethod> iosMethods;
+  final List<EmulatorDetectionMethod> iosMethods;
 
   /// The threshold for the emulator check result
   /// If the score is greater than the threshold, the device is considered NOT physical
   final double iosThreshold;
 
-  final List<BaseMethod> linuxMethods;
+  final List<EmulatorDetectionMethod> linuxMethods;
 
   /// The threshold for the emulator check result
   /// If the score is greater than the threshold, the device is considered NOT physical
   final double linuxThreshold;
 
-  final List<BaseMethod> macOsMethods;
+  final List<EmulatorDetectionMethod> macOsMethods;
 
   /// The threshold for the emulator check result
   /// If the score is greater than the threshold, the device is considered NOT physical
   final double macOsThreshold;
 
-  final List<BaseMethod> windowsMethods;
+  final List<EmulatorDetectionMethod> windowsMethods;
 
   /// The threshold for the emulator check result
   /// If the score is greater than the threshold, the device is considered NOT physical
   final double windowsThreshold;
 
   EmulatorGuard({
-    List<BaseMethod>? androidMethods,
-    List<BaseMethod>? iosMethods,
+    List<EmulatorDetectionMethod>? androidMethods,
+    List<EmulatorDetectionMethod>? iosMethods,
     this.linuxMethods = const [],
     this.macOsMethods = const [],
     this.windowsMethods = const [],
@@ -143,7 +143,7 @@ class EmulatorGuard {
   }
 
   Future<({double totalScore, List<String> reasons})> _calculateScore(
-    List<BaseMethod> methods,
+    List<EmulatorDetectionMethod> methods,
   ) async {
     final executeResults = methods.map((method) => method.execute()).toList();
     final result = await Future.wait(executeResults);

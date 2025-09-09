@@ -1,6 +1,5 @@
 import 'package:emulator_guard/emulator_guard.dart';
-import 'package:emulator_guard/methods/base_method.dart';
-import 'package:emulator_guard/result.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -50,16 +49,19 @@ void main() {
     });
   });
 
-  group('BaseMethod', () {
+  group('EmulatorDetectionMethod', () {
     test('should create method with score and reason', () {
-      final method = TestBaseMethod(score: 25.0, reason: 'Test reason');
+      final method = TestEmulatorDetectionMethod(
+        score: 25.0,
+        reason: 'Test reason',
+      );
 
       expect(method.score, 25.0);
       expect(method.reason, 'Test reason');
     });
 
     test('should create method with score only', () {
-      final method = TestBaseMethod(score: 15.0);
+      final method = TestEmulatorDetectionMethod(score: 15.0);
 
       expect(method.score, 15.0);
       expect(method.reason, isNull);
@@ -83,7 +85,7 @@ void main() {
     });
 
     test('should create with custom values', () {
-      final customMethods = [TestBaseMethod(score: 10.0)];
+      final customMethods = [TestEmulatorDetectionMethod(score: 10.0)];
       final guard = EmulatorGuard(
         androidMethods: customMethods,
         iosMethods: customMethods,
@@ -122,7 +124,7 @@ void main() {
     });
 
     test('should create with custom values', () {
-      final customMethods = [TestBaseMethod(score: 20.0)];
+      final customMethods = [TestEmulatorDetectionMethod(score: 20.0)];
       final detector = EmulatorGuard(
         androidMethods: customMethods,
         iosMethods: customMethods,
@@ -151,9 +153,9 @@ void main() {
   });
 }
 
-// Test helper class for BaseMethod
-class TestBaseMethod extends BaseMethod {
-  TestBaseMethod({required super.score, super.reason});
+// Test helper class for EmulatorDetectionMethod
+class TestEmulatorDetectionMethod extends EmulatorDetectionMethod {
+  TestEmulatorDetectionMethod({required super.score, super.reason});
 
   @override
   Future<({double score, String? reason})> execute() async {

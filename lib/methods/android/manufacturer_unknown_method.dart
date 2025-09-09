@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device manufacturer is unknown or empty.
 ///
@@ -17,7 +17,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 10 points when manufacturer is "unknown" or empty
 ///
 /// **Performance**: Fast - only checks string property
-class ManufacturerUnknownMethod extends BaseMethod {
+class ManufacturerUnknownMethod extends EmulatorDetectionMethod {
   ManufacturerUnknownMethod({
     super.score = 10,
     super.reason = "Manufacturer is unknown or empty",

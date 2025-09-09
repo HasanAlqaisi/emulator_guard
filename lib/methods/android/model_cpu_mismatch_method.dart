@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device model and CPU mismatch.
 ///
@@ -15,7 +15,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 10 points when model contains "sm-g" and hardware contains "x86"
 ///
 /// **Performance**: Fast - only checks string properties
-class ModelCpuMismatchMethod extends BaseMethod {
+class ModelCpuMismatchMethod extends EmulatorDetectionMethod {
   ModelCpuMismatchMethod({
     super.score = 10,
     super.reason = "Model looks real but CPU indicates emulator",

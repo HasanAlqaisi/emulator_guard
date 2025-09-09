@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device bootloader is "unknown".
 ///
@@ -16,7 +16,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 5 points when bootloader is "unknown"
 ///
 /// **Performance**: Fast - only checks string property
-class BootloaderMethod extends BaseMethod {
+class BootloaderMethod extends EmulatorDetectionMethod {
   BootloaderMethod({super.score = 5, super.reason = "Bootloader is unknown"});
 
   @override

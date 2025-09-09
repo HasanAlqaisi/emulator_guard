@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device name contains "generic" or "emulator".
 ///
@@ -14,7 +14,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 15 points when device name contains "generic" or "emulator"
 ///
 /// **Performance**: Fast - only checks string property
-class DeviceEmulatorMethod extends BaseMethod {
+class DeviceEmulatorMethod extends EmulatorDetectionMethod {
   DeviceEmulatorMethod({
     super.score = 15,
     super.reason = "Device name indicates emulator",

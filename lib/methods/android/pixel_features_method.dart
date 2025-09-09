@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks if the device has Pixel-exclusive features.
 ///
@@ -15,7 +15,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 15 points when brand is "google" and system features contain "pixel"
 ///
 /// **Performance**: Fast - only checks string properties
-class PixelFeaturesMethod extends BaseMethod {
+class PixelFeaturesMethod extends EmulatorDetectionMethod {
   PixelFeaturesMethod({
     super.score = 15,
     super.reason = "Pixel-exclusive features detected on non-Pixel device",

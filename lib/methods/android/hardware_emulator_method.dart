@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method that checks hardware and board information for emulator indicators.
 ///
@@ -17,7 +17,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 20 points when emulator hardware is detected
 ///
 /// **Performance**: Fast - only checks string properties
-class HardwareEmulatorMethod extends BaseMethod {
+class HardwareEmulatorMethod extends EmulatorDetectionMethod {
   HardwareEmulatorMethod({
     super.score = 20,
     super.reason = "Hardware or board indicates emulator",

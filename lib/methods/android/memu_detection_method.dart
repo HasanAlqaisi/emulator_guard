@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 
-import 'package:emulator_guard/methods/base_method.dart';
+import 'package:emulator_guard/methods/emulator_detection_method.dart';
 
 /// Detection method specifically designed to identify MEmu emulator.
 ///
@@ -27,7 +27,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// **Score**: 30 points when MEmu is detected
 ///
 /// **Performance**: Asynchronous file operations to avoid blocking UI thread
-class MEmuDetectionMethod extends BaseMethod {
+class MEmuDetectionMethod extends EmulatorDetectionMethod {
   MEmuDetectionMethod({
     super.score = 30,
     super.reason = "MEmu emulator detected",

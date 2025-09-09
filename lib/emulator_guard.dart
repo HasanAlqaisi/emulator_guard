@@ -2,6 +2,8 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:emulator_guard/methods/methods.dart';
 import 'package:emulator_guard/result.dart';
 
+export 'package:emulator_guard/result.dart';
+
 /// A comprehensive Flutter package for detecting emulators and simulators across multiple platforms.
 ///
 /// EmulatorGuard uses multiple detection methods and provides a scoring system to determine
@@ -104,35 +106,35 @@ class EmulatorGuard {
         final (:reasons, :totalScore) = await _calculateScore(androidMethods);
         return EmulatorCheckResult(
           score: totalScore > 100 ? 100 : totalScore,
-          isEmulator: totalScore > androidThreshold,
+          isEmulator: totalScore >= androidThreshold,
           reasons: reasons,
         );
       case IosDeviceInfo():
         final (:reasons, :totalScore) = await _calculateScore(iosMethods);
         return EmulatorCheckResult(
           score: totalScore > 100 ? 100 : totalScore,
-          isEmulator: totalScore > iosThreshold,
+          isEmulator: totalScore >= iosThreshold,
           reasons: reasons,
         );
       case LinuxDeviceInfo():
         final (:reasons, :totalScore) = await _calculateScore(linuxMethods);
         return EmulatorCheckResult(
           score: totalScore > 100 ? 100 : totalScore,
-          isEmulator: totalScore > linuxThreshold,
+          isEmulator: totalScore >= linuxThreshold,
           reasons: reasons,
         );
       case MacOsDeviceInfo():
         final (:reasons, :totalScore) = await _calculateScore(macOsMethods);
         return EmulatorCheckResult(
           score: totalScore > 100 ? 100 : totalScore,
-          isEmulator: totalScore > macOsThreshold,
+          isEmulator: totalScore >= macOsThreshold,
           reasons: reasons,
         );
       case WindowsDeviceInfo():
         final (:reasons, :totalScore) = await _calculateScore(windowsMethods);
         return EmulatorCheckResult(
           score: totalScore > 100 ? 100 : totalScore,
-          isEmulator: totalScore > windowsThreshold,
+          isEmulator: totalScore >= windowsThreshold,
           reasons: reasons,
         );
       case BaseDeviceInfo():

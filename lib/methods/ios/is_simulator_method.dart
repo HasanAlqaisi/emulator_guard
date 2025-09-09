@@ -2,9 +2,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 import 'package:emulator_guard/methods/base_method.dart';
 
+/// Detection method that checks if the device is a simulator from device_info_plus package.
 class IsSimulatorMethod extends BaseMethod {
   IsSimulatorMethod({
-    super.score = 40,
+    super.score = 100,
     super.reason = "DeviceInfo.isPhysicalDevice is false",
   });
 

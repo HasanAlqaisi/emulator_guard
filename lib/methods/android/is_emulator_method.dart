@@ -5,7 +5,7 @@ import 'package:emulator_guard/methods/base_method.dart';
 /// Detection method that checks if the device is an emulator from device_info_plus package.
 class IsEmulatorMethod extends BaseMethod {
   IsEmulatorMethod({
-    super.score = 40,
+    super.score = 100,
     super.reason = "DeviceInfo.isPhysicalDevice is false",
   });
 

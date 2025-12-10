@@ -1,17 +1,15 @@
 import 'package:emulator_guard/methods/android/android.dart';
 
 final allAndroidMethods = [
-  AvailableRamMethod(),
   BlueStacksDetectionMethod(),
   BoardEmulatorMethod(),
-  BootloaderMethod(),
   BrandModelMismatchMethod(),
   BuildTypeMethod(),
+  ClusteredCiSignalsMethod(),
   DeviceEmulatorMethod(),
   EmulatorFilesMethod(),
   FingerprintCIMethod(),
   FingerprintDevKeysMethod(),
-  FreeDiskSpaceMethod(),
   HardwareEmulatorMethod(),
   HardwareX86Method(),
   HostCIMethod(),
@@ -24,6 +22,5 @@ final allAndroidMethods = [
   ModelEmulatorMethod(),
   PixelFeaturesMethod(),
   ProductEmulatorMethod(),
-  SerialNumberMethod(),
   SystemFeaturesEmptyMethod(),
 ];

@@ -336,7 +336,7 @@ class _EmulatorGuardExampleState extends State<EmulatorGuardExample> {
                                 left: 8,
                                 bottom: 4,
                               ),
-                              child: Text('• $reason'),
+                              child: SelectableText('• $reason'),
                             ),
                           ),
                         ],

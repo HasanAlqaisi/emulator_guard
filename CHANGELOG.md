@@ -1,3 +1,9 @@
+## 0.2.0
+- Remove methods: AvailableRamMethod, FreeDiskSpaceMethod since they can produce high percentage of false positives
+- Remove SerialNumberMethod
+- Add ClusteredCiSignalsMethod
+
+
 ## 0.1.0+1
 - Update README.md to fix the broken link
 

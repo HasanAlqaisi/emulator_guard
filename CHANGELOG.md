@@ -1,3 +1,7 @@
+## 0.3.0
+- Upgrade `device_info_plus` dependency to ^13.2.0
+
+
 ## 0.2.0
 - Remove methods: AvailableRamMethod, FreeDiskSpaceMethod since they can produce high percentage of false positives
 - Remove SerialNumberMethod
